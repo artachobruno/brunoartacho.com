@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: brunoartacho-com
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: "camera=(), microphone=(), geolocation=()"
+      - path: /assets/css/*
+        name: Cache-Control
+        value: "public, max-age=604800, must-revalidate"
+      - path: /assets/js/*
+        name: Cache-Control
+        value: "public, max-age=604800, must-revalidate"
+      - path: /assets/img/*
+        name: Cache-Control
+        value: "public, max-age=604800, must-revalidate"
+    routes:
+      - type: rewrite
+        source: /about
+        destination: /about.html
+      - type: rewrite
+        source: /leadership
+        destination: /leadership.html
+      - type: rewrite
+        source: /research
+        destination: /research.html
+      - type: rewrite
+        source: /athletespace
+        destination: /athletespace.html
+      - type: rewrite
+        source: /writing
+        destination: /writing.html
+      - type: rewrite
+        source: /contact
+        destination: /contact.html
+      - type: rewrite
+        source: /*
+        destination: /404.html
